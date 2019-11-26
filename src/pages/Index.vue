@@ -2,7 +2,8 @@
   <q-page padding>
     <div v-if="start">
     <p class="row">
-      <my-input :num="number1" /> <span class="text-h6 q-pa-sm">{{ operator }}</span>  <my-input :num="number2" /> <span class="text-h6 q-pa-sm">=</span> <my-input :num="number3" />
+      <my-input :num="number1" :dueDate.sync="taskToSubmit.dueDate" />
+      <modal-task-due-date @clear="clearDueDate"  /> <span class="text-h6 q-pa-sm">{{ operator }}</span>  <my-input :num="number2" /> <span class="text-h6 q-pa-sm">=</span> <my-input :num="number3" />
     </p>
     </div>
     <q-btn v-if="start" color="info" label="Check" @click="checkAnswer" />
@@ -21,7 +22,8 @@ export default {
       operators: ["*","+","-","/"],
       operator:"",
       start:false,
-      hiddenNum:null
+      hiddenNum:null,
+      userInput:null
     }
   },
   methods:{
@@ -35,12 +37,12 @@ export default {
       this.number2 = this.hiddenNum != 2 ?  Math.abs(Math.floor((Math.random() * 10) + 1)) : null
       this.operator = this.operators[Math.floor(Math.random()*this.operators.length)]
       this.number3 = this.hiddenNum != 3 ? parseFloat(eval(this.number1 + this.operator + this.number2)) : null
-      if(!isFinite(this.number3) || this.number3 <= 0){
+      if(!isFinite(this.number3)){
         this.generate()
       }
     },
     checkAnswer(){
-
+      console.log(this.number1)
     }
   },
   components: {
