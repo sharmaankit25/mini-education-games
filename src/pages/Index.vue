@@ -2,8 +2,11 @@
   <q-page padding>
     <div v-if="start">
     <p class="row">
-      <my-input :num="number1" :dueDate.sync="taskToSubmit.dueDate" />
-      <modal-task-due-date @clear="clearDueDate"  /> <span class="text-h6 q-pa-sm">{{ operator }}</span>  <my-input :num="number2" /> <span class="text-h6 q-pa-sm">=</span> <my-input :num="number3" />
+      <my-input :num.sync="number1" />
+      <span class="text-h6 q-pa-sm">{{ operator }}</span>
+      <my-input :num.sync="number2" />
+      <span class="text-h6 q-pa-sm">=</span>
+      <my-input :num.sync="number3" />
     </p>
     </div>
     <q-btn v-if="start" color="info" label="Check" @click="checkAnswer" />
