@@ -1,15 +1,23 @@
 <template>
 <div class="q-pa-sm">
-  <span class="text-h6" v-if="num != null" padding>{{ num }}</span>
-  <q-input v-else label="Enter Number"
+  <span class="text-h6" v-if="value != null" padding>{{ value }}</span>
+    <q-input v-else label="Enter Number"
     outlined
-    :value="num"
+    :value="value"
     autofocus
-    @input="$emit('update:num', $event)" />
+    v-on="listeners" />
 </div>
 </template>
 <script>
 export default {
-  props:['num']
+  props:['value'],
+  computed: {
+    listeners() {
+      return {
+        ...this.$listeners,
+        input:event => this.$emit('update:value',event)
+      }
+    }
+  }
 }
 </script>
